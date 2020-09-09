@@ -1,6 +1,11 @@
-class CLI
+class Run
 
         attr_accessor :user, :joke 
+
+        def self.start
+            new_run = Run.new
+            new_run.get_user
+        end
 
         def get_user
             puts "What's your name?"
@@ -19,11 +24,9 @@ class CLI
             puts "- l : see a list of categories"
             puts "- x : exit the PUNDERDOME!"
 
-           
             input = gets.chomp
             
-            case input
-                
+            case input       
                 when "f" 
                     puts
                     display_favorites
@@ -32,7 +35,7 @@ class CLI
                 when "l"
                     #list_categories method
                 when "x"
-                    #exit_punderdome method
+                    exit_punderdome
                 end
         end
 
