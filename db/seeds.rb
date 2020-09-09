@@ -1,4 +1,7 @@
-User.create(
+User.delete_all
+Joke.delete_all
+
+User.find_or_create_by(
     name: "Conrad"
 )
 
@@ -46,4 +49,10 @@ Joke.create(
     title: "Holy Water Joke",
     setup: "How do you make holy water?",
     punchline: "You boil the hell out of it!"
+)
+
+Joke.create(
+    title: "Jay-Z Joke"
+    setup: "What does Jay-Z call Beyonce after proposing?"
+    punchline: "Fiyonce Knowles!"
 )
