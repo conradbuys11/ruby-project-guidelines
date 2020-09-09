@@ -1,44 +1,81 @@
-# def welcome
-#     puts "Welcome to the PUNDERDOME!"
+class CLI
 
-#     #puts Would you like to favorite this joke? Y/N
-#     #Favorite.create(user,joke)
-# end
+        attr_accessor :user, :joke 
 
-#stretch goal: delete user (very sad D:)
-
-def get_user
-    puts "What's your name?"
-    input = gets.chomp.capitalize
-    this_user = User.find_or_create_by(name: input)
-        #based on whether the user is new, say "welcome" vs "welcome back"
-        #make sure to .capitalize the gets.chomp
-    puts "Welcome to the PUNDERDOME, #{this_user.name}!"
-    this_user
-end
-
-def get_joke(user)
-    puts "Would you like to hear a joke? Y/n"
-    #commands for future/stretch:
-    #help
-        #add user to db
-        #categories
-        #reference: https://learn.co/lessons/cli-applications-jukebox
-
-
-    if gets.chomp != "n"
-        #stretch goal - use regex [nN]
-        joke = Joke.all.sample
-        puts "******************"
-        if joke.setup
-            puts joke.setup
+        def get_user
+            puts "What's your name?"
+            input = gets.chomp.capitalize
+            self.user = User.find_or_create_by(name: input)
+                #based on whether the user is new, say "welcome" vs "welcome back"
+                #make sure to .capitalize the gets.chomp
+            puts "Welcome to the PUNDERDOME, #{self.user.name}!"
+            main_menu
         end
-        puts joke.punchline
-        puts "******************"
-        get_joke(user)
-        #make sure not to repeat jokes? stretch goal
-    else
-        puts "Well... okay, I guess? Why are you even here, then?"
-    end
-end
 
+        def main_menu
+            puts "Choose from the options below:"
+            puts "- f :  see your favorite jokes"
+            puts "- j : get a random joke"
+            puts "- l : see a list of categories"
+            puts "- x : exit the PUNDERDOME!"
+           
+            input = gets.chomp
+            
+            case input
+                when "f" 
+                    #display_faves method
+                when "j"
+                    get_joke 
+                when "l"
+                    #list_categories method
+                when "x"
+                    #exit_punderdome method
+                end
+
+
+            end
+
+
+
+            #see favorites
+            #get random joke
+            #random by category
+            #exit
+
+            #depending on input, run different method
+
+        end
+
+        def get_joke
+            
+           
+                #reference: https://learn.co/lessons/cli-applications-jukebox
+
+            #deprecated - option in the menu
+
+            
+                #stretch goal - use regex [nN]
+                self.joke = Joke.all.sample
+                puts "******************"
+                if self.joke.setup
+                    puts self.joke.setup
+                end
+                puts self.joke.punchline
+                puts "******************"
+
+
+                puts "Did you like this joke? Y/n"
+                input = gets.chomp
+                if input != "n"
+                    self.user.add_favorite(self.joke)
+                    puts "Added to your favorites!"
+                end
+
+                main_menu
+            
+                #make sure not to repeat jokes? stretch goal 
+        end
+
+       
+
+end
