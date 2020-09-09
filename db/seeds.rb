@@ -1,5 +1,6 @@
 User.delete_all
 Joke.delete_all
+Favorite.delete_all
 
 User.find_or_create_by(
     name: "Conrad"
@@ -9,50 +10,78 @@ User.create(
     name: "Melinda"
 )
 
+# Category.create(
+#     name: "NSFW"
+# )
+
+# Category.create(
+#     name: "Pun"
+# )
+
+# Category.create(
+#     name: "General"
+# )
+
+# Category.create(
+#     name: "Anti Joke"
+# )
+
+# Category.create(
+#     name: "Dad Joke"
+# )
+
 Joke.create(
     title: "Chicken Coop Joke",
     setup: "Why does a chicken coop only have two doors?",
-    punchline: "Because if it had four doors, it'd be a chicken sedan!"
+    punchline: "Because if it had four doors, it'd be a chicken sedan!",
+    category: Category.find_or_create_by(name: "Dad Joke")
 )
 
 Joke.create(
     title: "Mermaid Joke",
     setup: "Why do mermaids wear seashells as bras?",
-    punchline: "Because B-shells are too small!"
+    punchline: "Because B-shells are too small!",
+    category: Category.find_or_create_by(name: "NSFW")
 )
 
 Joke.create(
     title: "Shovel Joke",
     setup: nil,
-    punchline: "The invention of the shovel was a groundbreaking discovery."
+    punchline: "The invention of the shovel was a groundbreaking discovery.",
+    category: Category.find_or_create_by(name: "Pun")
 )
 
 Joke.create(
     title: "Duck Joke",
     setup: "What's a duck's favorite drug?",
-    punchline: "Quack!"
+    punchline: "Quack!",
+    category: Category.find_or_create_by(name: "Pun")
 )
 
 Joke.create(
     title: "Ghost Joke",
     setup: "Why are ghosts banned from liquor stores?",
-    punchline: "Because they steal all the boos!"
+    punchline: "Because they steal all the boos!",
+    category: Category.find_or_create_by(name: "Dad Joke")
 )
 
 Joke.create(
     title: "Glasses Joke",
     setup: "You should wear glasses when doing math.",
-    punchline: "It improves di-vision!"
+    punchline: "It improves di-vision!",
+    category: Category.find_or_create_by(name: "Pun")
 )
 
 Joke.create(
     title: "Holy Water Joke",
     setup: "How do you make holy water?",
-    punchline: "You boil the hell out of it!"
+    punchline: "You boil the hell out of it!",
+    category: Category.find_or_create_by(name: "Dad Joke")
 )
 
 Joke.create(
     title: "Jay-Z Joke",
     setup: "What does Jay-Z call Beyonce after proposing?",
-    punchline: "Fiyonce Knowles!"
+    punchline: "Fiyonce Knowles!",
+    category: Category.find_or_create_by(name: "Pun")
 )

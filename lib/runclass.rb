@@ -34,7 +34,7 @@ class Run
                 when "j"
                     get_joke 
                 when "l"
-                    #list_categories method
+                    joke_categories
                 when "x"
                     exit_punderdome
                 end
@@ -66,6 +66,23 @@ class Run
         def display_favorites
             #if no favorites, say "hey bud wut u doin go look at jokes fool"
             self.user.list_favorites
+            main_menu
+        end
+
+        def joke_categories
+            puts "Type in a category below:"
+            puts
+            Category.all.each{ |category|
+                puts category.name
+            }
+            puts
+            category_joke = Category.find_by(name: gets.chomp).list_jokes.sample
+            puts
+            if category_joke.setup
+                puts category_joke.setup
+            end
+            puts category_joke.punchline
+            puts
             main_menu
         end
 
