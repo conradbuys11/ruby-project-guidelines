@@ -17,6 +17,7 @@ class Run
             main_menu
         end
 
+        #reference: https://learn.co/lessons/cli-applications-jukebox
         def main_menu
             puts "Choose from the options below:"
             puts "- f :  see your favorite jokes"
@@ -40,31 +41,30 @@ class Run
         end
 
         def get_joke
+            self.joke = Joke.all.sample
+            puts "******************"
+            if self.joke.setup
+                puts self.joke.setup
+            end
+            puts self.joke.punchline
+            puts "******************"
+            set_favorite
+        end
 
-            #reference: https://learn.co/lessons/cli-applications-jukebox
-                #stretch goal - use regex [nN]
-
-                self.joke = Joke.all.sample
-                puts "******************"
-                if self.joke.setup
-                    puts self.joke.setup
-                end
-                puts self.joke.punchline
-                puts "******************"
-
-                #add to favorites 
-
-                puts "Did you like this joke? Y/n"
-                input = gets.chomp
-                if input != "n"
-                    self.user.add_favorite(self.joke)
-                    puts "Added to your favorites!"
-                    puts "*****************"
-                end
-                main_menu
+        def set_favorite
+            puts "Did you like this joke? Y/n"
+            input = gets.chomp
+            if input != "n"
+                self.user.add_favorite(self.joke)
+                puts "Added to your favorites!"
+                puts "*****************"
+            end
+            self.user = User.find(self.user.id)
+            main_menu
         end
 
         def display_favorites
+            #if no favorites, say "hey bud wut u doin go look at jokes fool"
             self.user.favorites.each {|fave|
             
             if fave.joke.setup 
@@ -73,7 +73,6 @@ class Run
             puts fave.joke.punchline
             puts
         }
-
             main_menu
         end
 
