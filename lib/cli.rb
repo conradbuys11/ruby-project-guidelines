@@ -18,12 +18,15 @@ class CLI
             puts "- j : get a random joke"
             puts "- l : see a list of categories"
             puts "- x : exit the PUNDERDOME!"
+
            
             input = gets.chomp
             
             case input
+                
                 when "f" 
-                    #display_faves method
+                    puts
+                    display_favorites
                 when "j"
                     get_joke 
                 when "l"
@@ -31,30 +34,13 @@ class CLI
                 when "x"
                     #exit_punderdome method
                 end
-
-
-            end
-
-
-
-            #see favorites
-            #get random joke
-            #random by category
-            #exit
-
-            #depending on input, run different method
-
         end
 
         def get_joke
-            
-           
-                #reference: https://learn.co/lessons/cli-applications-jukebox
 
-            #deprecated - option in the menu
-
-            
+            #reference: https://learn.co/lessons/cli-applications-jukebox
                 #stretch goal - use regex [nN]
+
                 self.joke = Joke.all.sample
                 puts "******************"
                 if self.joke.setup
@@ -63,19 +49,32 @@ class CLI
                 puts self.joke.punchline
                 puts "******************"
 
+                #add to favorites 
 
                 puts "Did you like this joke? Y/n"
                 input = gets.chomp
                 if input != "n"
                     self.user.add_favorite(self.joke)
                     puts "Added to your favorites!"
+                    puts "*****************"
                 end
-
                 main_menu
-            
-                #make sure not to repeat jokes? stretch goal 
         end
 
-       
+        def display_favorites
+            self.user.favorites.each {|fave|
+            
+            if fave.joke.setup 
+                puts fave.joke.setup 
+            end
+            puts fave.joke.punchline
+            puts
+        }
 
+            main_menu
+        end
+
+        def exit_punderdome
+            puts "Okay, well...bye, I guess..."
+        end
 end
