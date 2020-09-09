@@ -52,7 +52,7 @@ Joke.create(
 )
 
 Joke.create(
-    title: "Jay-Z Joke"
-    setup: "What does Jay-Z call Beyonce after proposing?"
+    title: "Jay-Z Joke",
+    setup: "What does Jay-Z call Beyonce after proposing?",
     punchline: "Fiyonce Knowles!"
 )

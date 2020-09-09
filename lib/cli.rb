@@ -29,10 +29,14 @@ def get_joke(user)
     if gets.chomp != "n"
         #stretch goal - use regex [nN]
         joke = Joke.all.sample
+        puts "******************"
         if joke.setup
             puts joke.setup
         end
         puts joke.punchline
+        puts "******************"
+        get_joke(user)
+        #make sure not to repeat jokes? stretch goal
     else
         puts "Well... okay, I guess? Why are you even here, then?"
     end
