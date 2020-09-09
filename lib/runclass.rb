@@ -65,14 +65,7 @@ class Run
 
         def display_favorites
             #if no favorites, say "hey bud wut u doin go look at jokes fool"
-            self.user.favorites.each {|fave|
-            
-            if fave.joke.setup 
-                puts fave.joke.setup 
-            end
-            puts fave.joke.punchline
-            puts
-        }
+            self.user.list_favorites
             main_menu
         end
 
