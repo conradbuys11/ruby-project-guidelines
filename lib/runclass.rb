@@ -76,7 +76,7 @@ class Run
                 puts category.name
             }
             puts
-            category_joke = Category.find_by(name: gets.chomp.list_jokes.sample)
+            category_joke = Category.find_by(name: gets.chomp.downcase).list_jokes.sample
             puts
             if category_joke.setup
                 puts category_joke.setup
