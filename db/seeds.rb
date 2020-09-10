@@ -1,3 +1,5 @@
+require_relative "../lib/api_communicator.rb"
+
 User.delete_all
 Joke.delete_all
 Favorite.delete_all
@@ -86,3 +88,10 @@ Joke.create(
     punchline: "Red paint.",
     category: Category.find_or_create_by(name: "anti joke")
 )
+
+get_from_api(4).each{ |joke|
+    Joke.create(
+        category: Category.find_or_create_by(name: "dad joke"),
+        punchline: joke
+    )
+}
