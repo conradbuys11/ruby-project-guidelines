@@ -10,26 +10,6 @@ User.create(
     name: "Melinda"
 )
 
-# Category.create(
-#     name: "NSFW"
-# )
-
-# Category.create(
-#     name: "Pun"
-# )
-
-# Category.create(
-#     name: "General"
-# )
-
-# Category.create(
-#     name: "Anti Joke"
-# )
-
-# Category.create(
-#     name: "Dad Joke"
-# )
-
 Joke.create(
     title: "Chicken Coop Joke",
     setup: "Why does a chicken coop only have two doors?",
@@ -84,4 +64,25 @@ Joke.create(
     setup: "What does Jay-Z call Beyonce after proposing?",
     punchline: "Fiyonce Knowles!",
     category: Category.find_or_create_by(name: "Pun")
+)
+
+Joke.create(
+    title: "Napoleon anti-joke",
+    setup: "Where does Napoleon keep his armies?",
+    punchline: "In his sleevies.",
+    category: Category.find_or_create_by(name: "Anti joke")
+)
+
+Joke.create(
+    title: "Stick anti joke",
+    setup: "What's brown and sticky?",
+    punchline: "A stick.",
+    category: Category.find_or_create_by(name: "Anti joke")
+)
+
+Joke.create(
+    title: "Paint anti joke",
+    setup: "What's red and smells like blue paint?",
+    punchline: "Red paint.",
+    category: Category.find_or_create_by(name: "Anti joke")
 )

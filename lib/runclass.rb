@@ -9,7 +9,7 @@ class Run
 
         def get_user
             puts "What's your name?"
-            input = gets.chomp.capitalize
+            input = gets.chomp.split.map(&:capitalize).join(' ')
             self.user = User.find_or_create_by(name: input)
                 #based on whether the user is new, say "welcome" vs "welcome back"
                 #make sure to .capitalize the gets.chomp
@@ -20,8 +20,8 @@ class Run
         #reference: https://learn.co/lessons/cli-applications-jukebox
         def main_menu
             puts "Choose from the options below:"
-            puts "- f :  see your favorite jokes"
-            puts "- j : get a random joke"
+            puts "- f : see your favorite jokes"
+            puts "- r : get a random joke"
             puts "- l : see a list of categories"
             puts "- x : exit the PUNDERDOME!"
 
@@ -29,9 +29,9 @@ class Run
             
             case input       
                 when "f" 
-                    puts
+                   puts
                     display_favorites
-                when "j"
+                when "r"
                     get_joke 
                 when "l"
                     joke_categories
@@ -76,14 +76,14 @@ class Run
                 puts category.name
             }
             puts
-            category_joke = Category.find_by(name: gets.chomp).list_jokes.sample
+            category_joke = Category.find_by(name: gets.chomp.list_jokes.sample)
             puts
             if category_joke.setup
                 puts category_joke.setup
             end
             puts category_joke.punchline
             puts
-            main_menu
+            set_favorite
         end
 
         def exit_punderdome
