@@ -54,7 +54,7 @@ class Run
         def set_favorite
             puts "Did you like this joke? Y/n"
             input = gets.chomp
-            if input == /^[N]/i
+            if !!input.match(/[^N]/i)
                 self.user.add_favorite(self.joke)
                 puts "Added to your favorites!"
                 puts "*****************"
