@@ -16,6 +16,10 @@ class Run
                 #make sure to .capitalize the gets.chomp
             puts
             puts "Welcome to the PUNDERDOME, #{self.user.name}!".cyan.bold
+            Whirly.start spinner: "pong", color: false, status: " - now with extra dad jokes - ".italic.magenta do
+                sleep 3
+              end
+              puts
             main_menu
         end
 

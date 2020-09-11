@@ -72,6 +72,9 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.7)
+    unicode-display_width (1.7.0)
+    whirly (0.2.6)
+      unicode-display_width (~> 1.1)
     wisper (2.0.1)
     zeitwerk (2.4.0)
 
@@ -87,6 +90,7 @@ DEPENDENCIES
   sinatra-activerecord
   sqlite3
   tty-prompt
+  whirly
 
 BUNDLED WITH
    2.1.4
