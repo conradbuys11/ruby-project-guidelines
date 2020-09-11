@@ -52,12 +52,18 @@ class Run
         end
 
         def set_favorite
-            puts "Did you like this joke? Y/N".light_magenta
-            input = gets.chomp
-            if !!input.match(/[^N]/i)
+
+            prompt = TTY::Prompt.new
+            choices = prompt.select("Did you like this joke? Y/N".light_magenta) do |menu|
+                menu.choice "Yes"
+                menu.choice "No"
+            end
+
+            if choices == "Yes"
                 self.user.add_favorite(self.joke)
                 puts "Added to your favorites!".italic.light_magenta
                 puts 
+            
             end
             self.user = User.find(self.user.id)
             main_menu
