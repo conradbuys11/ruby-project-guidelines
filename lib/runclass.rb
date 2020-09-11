@@ -21,26 +21,38 @@ class Run
 
         #reference: https://learn.co/lessons/cli-applications-jukebox
         def main_menu
+            prompt = TTY::Prompt.new
+            choices = prompt.select("Choose from the options below:") do |menu| #italic.light_cyan
+            menu.choice "- f : see your favorite jokes"
+            menu.choice "- r : get a random joke"
+            menu.choice "- l : see a list of categories"
+            menu.choice "- x : exit the "+"PUNDERDOME!".bold.green
+           end  
             
-            puts"Choose from the options below:".italic.light_cyan 
-            puts "- f : see your favorite jokes"
-            puts "- r : get a random joke"
-            puts "- l : see a list of categories"
-            puts "- x : exit the "+"PUNDERDOME!".bold.green
-               
-            input = gets.chomp
+           if choices == "- f : see your favorite jokes"
+                display_favorites
+           elsif choices == "- r : get a random joke"
+                get_joke 
+           elsif choices == "- l : see a list of categories"
+                joke_categories
+           else
+                exit_punderdome
+           end
+
+
+            # input = gets.chomp
              
-            case input      
-                when "f" 
-                   puts
-                    display_favorites
-                when "r"
-                    get_joke 
-                when "l"
-                    joke_categories
-                when "x"
-                    exit_punderdome
-                end
+            # case input      
+            #     when "f" 
+            #        puts
+            #         display_favorites
+            #     when "r"
+            #         get_joke 
+            #     when "l"
+            #         joke_categories
+            #     when "x"
+            #         exit_punderdome
+            #     end
         end
 
         def get_joke
