@@ -8,26 +8,29 @@ class Run
         end
 
         def get_user
-            puts "What's your name?"
+            puts
+            puts "What's your name?".magenta.bold
             input = gets.chomp.split.map(&:capitalize).join(' ')
             self.user = User.find_or_create_by(name: input)
                 #based on whether the user is new, say "welcome" vs "welcome back"
                 #make sure to .capitalize the gets.chomp
-            puts "Welcome to the PUNDERDOME, #{self.user.name}!"
+            puts
+            puts "Welcome to the PUNDERDOME, #{self.user.name}!".cyan.bold
             main_menu
         end
 
         #reference: https://learn.co/lessons/cli-applications-jukebox
         def main_menu
-            puts "Choose from the options below:"
+            
+            puts"Choose from the options below:".italic.light_cyan 
             puts "- f : see your favorite jokes"
             puts "- r : get a random joke"
             puts "- l : see a list of categories"
-            puts "- x : exit the PUNDERDOME!"
-
+            puts "- x : exit the "+"PUNDERDOME!".bold.green
+               
             input = gets.chomp
-            
-            case input       
+             
+            case input      
                 when "f" 
                    puts
                     display_favorites
@@ -42,22 +45,22 @@ class Run
 
         def get_joke
             self.joke = Joke.all.sample
-            puts "******************"
+            puts 
             if self.joke.setup
-                puts self.joke.setup
+                puts self.joke.setup.light_yellow.italic
             end
-            puts self.joke.punchline
-            puts "******************"
+            puts self.joke.punchline.light_yellow.italic
+            puts 
             set_favorite
         end
 
         def set_favorite
-            puts "Did you like this joke? Y/N"
+            puts "Did you like this joke? Y/N".light_magenta
             input = gets.chomp
             if !!input.match(/[^N]/i)
                 self.user.add_favorite(self.joke)
-                puts "Added to your favorites!"
-                puts "*****************"
+                puts "Added to your favorites!".italic.light_magenta
+                puts 
             end
             self.user = User.find(self.user.id)
             main_menu
@@ -70,7 +73,7 @@ class Run
         end
 
         def joke_categories
-            puts "Type in a category below:"
+            puts "Type in a category below:".italic.green
             puts
             Category.all.each{ |category|
                 puts category.name
@@ -79,14 +82,15 @@ class Run
             category_joke = Category.find_by(name: gets.chomp.downcase).list_jokes.sample
             puts
             if category_joke.setup
-                puts category_joke.setup
+                puts category_joke.setup.light_yellow
             end
-            puts category_joke.punchline
+            puts category_joke.punchline.light_yellow.italic
             puts
+            self.joke = category_joke
             set_favorite
         end
 
         def exit_punderdome
-            puts "Okay, well...bye, I guess..."
+            puts "Okay, well...bye, I guess...".light_red.italic
         end
 end

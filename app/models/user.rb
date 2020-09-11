@@ -9,14 +9,14 @@ class User < ActiveRecord::Base
 
     def list_favorites
         if self.favorites == []
-            puts "You have no favorite jokes yet!"
+            puts "You have no favorite jokes yet!".blue.italic
             puts
         else
             self.favorites.each { |fave|
             if fave.joke.setup
-                puts fave.joke.setup
+                puts fave.joke.setup.yellow
             end
-            puts fave.joke.punchline
+            puts fave.joke.punchline.yellow.italic
             puts
         }
         end
