@@ -65,7 +65,9 @@ class Run
 
             if choices == "Yes"
                 self.user.add_favorite(self.joke)
-                puts "Added to your favorites!".italic.light_magenta
+                Whirly.start spinner: "arrow3", color: false, status: "Added to your favorites!".italic.light_magenta do
+                    sleep 3
+                  end
                 puts 
             
             end
