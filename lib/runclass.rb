@@ -22,37 +22,22 @@ class Run
         #reference: https://learn.co/lessons/cli-applications-jukebox
         def main_menu
             prompt = TTY::Prompt.new
-            choices = prompt.select("Choose from the options below:") do |menu| #italic.light_cyan
-            menu.choice "- f : see your favorite jokes"
-            menu.choice "- r : get a random joke"
-            menu.choice "- l : see a list of categories"
-            menu.choice "- x : exit the "+"PUNDERDOME!".bold.green
+            choices = prompt.select("Choose from the options below:".italic.light_cyan) do |menu| 
+            menu.choice "- see your favorite jokes"
+            menu.choice "- get a random joke"
+            menu.choice "- get a joke by category"
+            menu.choice "- exit the "+"PUNDERDOME!".bold.green
            end  
             
-           if choices == "- f : see your favorite jokes"
+           if choices == "- see your favorite jokes"
                 display_favorites
-           elsif choices == "- r : get a random joke"
+           elsif choices == "- get a random joke"
                 get_joke 
-           elsif choices == "- l : see a list of categories"
+           elsif choices == "- get a joke by category"
                 joke_categories
            else
                 exit_punderdome
            end
-
-
-            # input = gets.chomp
-             
-            # case input      
-            #     when "f" 
-            #        puts
-            #         display_favorites
-            #     when "r"
-            #         get_joke 
-            #     when "l"
-            #         joke_categories
-            #     when "x"
-            #         exit_punderdome
-            #     end
         end
 
         def get_joke
@@ -85,13 +70,16 @@ class Run
         end
 
         def joke_categories
-            puts "Type in a category below:".italic.green
-            puts
+            prompt = TTY::Prompt.new
+            choices = prompt.select("Choose a category below:".italic.green) do |menu|
+            
             Category.all.each{ |category|
-                puts category.name
+                menu.choice category.name
             }
+            end
+
             puts
-            category_joke = Category.find_by(name: gets.chomp.downcase).list_jokes.sample
+            category_joke = Category.find_by(name: choices.downcase).list_jokes.sample
             puts
             if category_joke.setup
                 puts category_joke.setup.light_yellow
@@ -103,6 +91,8 @@ class Run
         end
 
         def exit_punderdome
+            puts
             puts "Okay, well...bye, I guess...".light_red.italic
+            puts
         end
 end
